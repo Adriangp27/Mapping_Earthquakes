@@ -1,3 +1,4 @@
+  
 //Add console.log to check if our code is successful
 console.log("successful");
 
@@ -21,6 +22,14 @@ let light = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles
         maxZoom: 18,
         accessToken: API_KEY
     });
+
+//creates a base layer that holds both maps
+let baseMaps = {
+    Street: streets,
+    Dark: dark,
+    Light: light
+};
+
 
 //creates the map object with a center and zoom level
 let map = L.map('mapid', {
