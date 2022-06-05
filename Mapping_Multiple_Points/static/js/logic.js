@@ -8,6 +8,7 @@ let map = L.map('mapid').setView([40.7, -94.5], 4);
 //adding multiple markers on the map
 //get data from cities.js
  let cityData = cities;
+
  //looping through the cities array
  cityData.forEach(function(city) {
     console.log(city)
@@ -15,6 +16,7 @@ let map = L.map('mapid').setView([40.7, -94.5], 4);
     .bindPopup("<h2>" + city.city + ", " + city.state + "</h2> <hr> <h3>Population " + city.population.toLocaleString() + "</h3>")
     .addTo(map);
    });
+
 
 
 
