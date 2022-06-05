@@ -1,4 +1,4 @@
-//Add console.log to check if our code is successful
+// Add console.log to see if our code is successful
 console.log("successful");
 
 // Having the tileLayer before accessing large datasets ensures that the map gets loaded before the data is added to it
@@ -20,13 +20,13 @@ attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap
 // instead, create a base layer that holds both maps
 let baseMaps = {
     "Streets": streets,
-    "Satellite Street": satelliteStreets
+    "Satellite": satelliteStreets
 }; 
 
 // Create the map object with a center (US) and zoom level
 let map = L.map('mapid', {
-    center: [43.7, -79.3],
-    zoom: 11,
+    center: [39.5, -98.5],
+    zoom: 3,
     layers: [streets]
 });
 
@@ -34,24 +34,9 @@ let map = L.map('mapid', {
 // Pass our map layers into our layers control and add the layers control to the map
 L.control.layers(baseMaps).addTo(map);
 
-// Accessing the Toronto Neighborhoods GeoJSON url
-let torontoHoods = "https://raw.githubusercontent.com/nicoserrano/Mapping_Earthquakes/Mapping_GeoJSON_Polygons/Mapping_GeoJSON_Polygons/torontoNeighborhoods.json";
+// Accessing earthquakes GeoJSON url
+let earthquakesPast7days = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson";
 
-let myStyle = {
-    color: "blue",
-    fillColor: "yellow",
-    weight: 1
-}
-
-d3.json(torontoHoods).then(function(data) {
-    console.log(data);
-    // Creating a GeoJSON layer with the retrieved data
-    L.geoJSON(data, {
-        style: myStyle,
-        onEachFeature: function(feature, layer) {
-            layer.bindPopup("<h3>Neighborhood: " + feature.properties.AREA_NAME + "</h3>")
-        }
-    }).addTo(map);
-
+d3.json(earthquakesPast7days).then(data => {
+    L.geoJSON(data).addTo(map);
 });
-
